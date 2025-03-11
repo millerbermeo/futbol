@@ -14,7 +14,7 @@ export class Torneo {
     @Column({ type: 'timestamp' })
     fecha_fin: Date
 
-    @Column({ type: "text", length: 250 })
+    @Column({ type: "text" })
     descripcion: string
 
     @CreateDateColumn({

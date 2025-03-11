@@ -29,7 +29,7 @@ export class Equipos {
 
     // Relación uno a muchos (Un equipo puede tener varios jugadores)
     @OneToMany(() => Jugador, (jugador) => jugador.equipo)
-    jugadores: Jugador[];
+    jugadores: Jugador[];s
 
     @CreateDateColumn({
         type: 'timestamp',
