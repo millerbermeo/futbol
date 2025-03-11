@@ -1,3 +1,4 @@
+import { Inscripcion } from 'src/inscripiones/entities/inscripciones.entity';
 import { Jugador } from 'src/jugadores/entities/jugadores.entity';
 import { Usuarios } from 'src/usuarios/entities/usuarios.entity';
 import {
@@ -29,7 +30,11 @@ export class Equipos {
 
     // Relación uno a muchos (Un equipo puede tener varios jugadores)
     @OneToMany(() => Jugador, (jugador) => jugador.equipo)
-    jugadores: Jugador[];s
+    jugadores: Jugador[];
+
+    // Relación uno a muchos (Un equipo puede inscribirse en varios torneos)
+    @OneToMany(() => Inscripcion, (inscripcion) => inscripcion.equipo)
+    inscripciones: Inscripcion[];
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -45,4 +50,5 @@ export class Equipos {
         select: false,
     })
     public updated_at: Date;
+
 }

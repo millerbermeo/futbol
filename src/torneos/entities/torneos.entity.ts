@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Inscripcion } from "src/inscripiones/entities/inscripciones.entity";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 
 @Entity('torneos')
 export class Torneo {
@@ -31,5 +32,10 @@ export class Torneo {
         select: false,
     })
     public updated_at: Date;
+
+
+    @OneToMany(() => Inscripcion, (inscripcion) => inscripcion.torneo)
+  inscripciones: Inscripcion[];
+
 
 }

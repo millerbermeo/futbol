@@ -1,12 +1,15 @@
 import { Categorias } from 'src/categorias/entities/categorias.entity';
 import { Equipos } from 'src/equipos/entities/equipos.entity';
+import { Estadisticas } from 'src/estadisticas-partidos/entities/estadisticas-partidos.entity';
+import { Sancion } from 'src/sanciones/entities/sacciones.entity';
 import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne, // Relación muchos a uno
+    ManyToOne,
+    OneToMany, // Relación muchos a uno
 } from 'typeorm';
 
 @Entity('jugadores')
@@ -33,6 +36,13 @@ export class Jugador {
     // Relación muchos a uno (Un jugador pertenece a una sola categoría)
     @ManyToOne(() => Categorias, (categoria) => categoria.jugadores)
     categoria: Categorias;
+
+    // Relación uno a muchos con sanciones (Un jugador puede tener muchas sanciones)
+    @OneToMany(() => Sancion, (sancion) => sancion.jugador, { cascade: true })
+    sanciones: Sancion[];
+
+    @OneToMany(() => Estadisticas, (estadisticas) => estadisticas.jugador)
+    estadisticas: Estadisticas[];
 
     @CreateDateColumn({
         type: 'timestamp',

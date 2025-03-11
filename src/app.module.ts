@@ -9,11 +9,22 @@ import { TorneosModule } from './torneos/torneos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PartidosModule } from './partidos/partidos.module';
 import { EstadisticasPartidosModule } from './estadisticas-partidos/estadisticas-partidos.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { EstadiosModule } from './estadios/estadios.module';
+import { SancionesModule } from './sanciones/sanciones.module';
+import { InscripionesModule } from './inscripiones/inscripiones.module';
+import { PagosModule } from './pagos/pagos.module';
+
+
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,
   }),
+  MulterModule.register({
+    dest: './uploads'
+  })
+  ,
 
   TypeOrmModule.forRoot({
     type: 'postgres',
@@ -30,7 +41,7 @@ import { EstadisticasPartidosModule } from './estadisticas-partidos/estadisticas
   }),
 
 
-    UsuariosModule, EquiposModule, JugadoresModule, CategoriasModule, TorneosModule, PartidosModule, EstadisticasPartidosModule],
+    UsuariosModule, EquiposModule, JugadoresModule, CategoriasModule, TorneosModule, PartidosModule, EstadisticasPartidosModule, EstadiosModule, SancionesModule, InscripionesModule, PagosModule],
   providers: [AppService],
 })
 export class AppModule { }

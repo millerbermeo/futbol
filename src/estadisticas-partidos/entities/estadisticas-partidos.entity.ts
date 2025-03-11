@@ -1,15 +1,19 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Jugador } from "src/jugadores/entities/jugadores.entity";
+import { Partido } from "src/partidos/entities/partidos.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('estadisticas_partidos')
+@Entity('estadisticas_partido_jugador')
 export class Estadisticas {
     @PrimaryGeneratedColumn()
     id: number
+    
+    @ManyToOne(() => Partido, (partido) => partido.estadisticas, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "partido_id" })
+    partido: Partido;
 
-    @Column({ type: "int" })
-    partido_id: number
-
-    @Column({ type: "int" })
-    jugador_id: number
+    @ManyToOne(() => Jugador, (jugador) => jugador.estadisticas, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "jugador_id" })
+    jugador: Jugador;
 
     @Column({ type: "int", nullable: true })
     goles: number

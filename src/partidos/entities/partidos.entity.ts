@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Estadio } from "src/estadios/entities/estadio.entity";
+import { Estadisticas } from "src/estadisticas-partidos/entities/estadisticas-partidos.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('partidos')
 export class Partido {
@@ -48,5 +50,12 @@ export class Partido {
         select: false,
     })
     public updated_at: Date;
+
+     // Relación muchos a uno (Un partido se juega en un solo estadio)
+     @ManyToOne(() => Estadio, (estadio) => estadio.partidos)
+     estadio: Estadio;
+
+     @OneToMany(() => Estadisticas, (estadisticas) => estadisticas.partido)
+     estadisticas: Estadisticas[];
 
 }
